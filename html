@@ -1,0 +1,162 @@
+!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        body{
+            background-image:url("8.jpg");
+            background-size: 100% 100%;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+
+        }
+        nav{
+            width: 800px;
+            height: 80px;
+            margin-top: 150px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+        button{
+            width: 120px;
+            height: 40px;
+            background-color: yellow;
+            color: blue;
+            font-family: monospace;
+            font-size: 20px;
+            border: solid 2px blue;
+            border-radius: 30px;
+        }
+        #cena{
+            color: blue;
+            font-size: 30px;
+            font-family: monospace;
+            width: 700px;
+            background-color: white;
+        }
+        #forma{
+            width: 800px;
+            height: 30px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+        }
+        #satiid, #decaid, #odrasliid, #keteringid{
+            background-color: lightblue;
+            color: red;
+            border: red solid 2px;
+            border-radius: 20px;
+        } 
+        #cena{
+            width: 400px;
+            height: 40px;
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+            border: solid white 2px;
+            border-radius: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+
+    </header>
+
+    <nav id="omotac">
+        <button type="button">o nama</button>
+        <button id="ponuda" type="button">ponuda</button>
+        <button type="button">galerija</button>
+        <button type="button">kontakt</button>
+    </nav>
+    <form id="forma">
+
+    </form>
+
+    <script>
+        document.getElementById("ponuda").addEventListener("click", function () {
+            let form = document.getElementById("forma");
+            let sati_ = document.createElement("input");
+            sati_.setAttribute("type", "number");
+            sati_.setAttribute("id", "satiid");
+            sati_.setAttribute("placeholder", "unesite br. sati");
+            form.appendChild(sati_);
+
+            let deca_ = document.createElement("input");
+            deca_.setAttribute("type", "number");
+            deca_.setAttribute("id", "decaid");
+            deca_.setAttribute("placeholder", "unesite br. dece");
+            form.appendChild(deca_);
+
+            let odrasli_ = document.createElement("input");
+            odrasli_.setAttribute("type", "number");
+            odrasli_.setAttribute("id", "odrasliid");
+            odrasli_.setAttribute("placeholder", "unesite br. odraslih");
+            form.appendChild(odrasli_);
+
+            let ketering_ = document.createElement("input");
+            ketering_.setAttribute("type", "text");
+            ketering_.setAttribute("id", "keteringid");
+            ketering_.setAttribute("placeholder", "upisite zelite li ketering");
+            form.appendChild(ketering_);
+
+
+        });
+        let omotac = document.getElementById("omotac");
+        let dugme = document.createElement("button");
+        dugme.setAttribute("type", "button");
+        dugme.setAttribute("id", "dugmeid");
+        dugme.innerText = "izracunaj";
+        omotac.appendChild(dugme);
+        document.getElementById("dugmeid").addEventListener("click", function () {
+            let sati = document.getElementById("satiid").value;
+                if(sati<2 || !sati){
+                    sati=2;
+                }
+            let deca = document.getElementById("decaid").value;
+                if(deca<10 || !deca){
+                    deca=10;
+                }
+            let odrasli = document.getElementById("odrasliid").value;
+                if(odrasli<5 || !odrasli){
+                    odrasli=5;
+                }
+            let ketering = document.getElementById("keteringid").value;
+                if(ketering!="da" && ketering!="ne"){
+                    ketering="da";
+                }
+
+            ponuda_igraonica(sati, deca, odrasli, ketering);
+            console.log(sati);
+            console.log(deca);
+            console.log(odrasli);
+            console.log(ketering);
+
+            
+        });
+        function ponuda_igraonica(sati = 2, deca = 10, odrasli = 5, ketering = "da") {
+            let cena = (sati * 0.5 * deca + sati * 0.7 * odrasli) * 150;
+            if (ketering == "ne") {
+                cena -= (parseInt(odrasli) + parseInt(deca)) * 20;
+            };
+            console.log(cena);
+            let div_cena = document.createElement("div");
+            div_cena.setAttribute("id", "cena");
+            div_cena.innerHTML = "cena je:" +cena+ " din.";
+            document.querySelector("body").appendChild(div_cena);
+        };
+
+    </script>
+</body>
+
+</html>
